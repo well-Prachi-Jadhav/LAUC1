@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Virtual Lab – Exact Differential Equations | PCCOE</title>
+
+<!-- Math.js for symbolic differentiation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
+
+<style>
+    body{
+        margin:0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background:#f4f6f9;
+        color:#333;
+    }
+    header{
+        background:#0a3d62;
+        color:#fff;
+        padding:15px 30px;
+        display:flex;
+        align-items:center;
+        gap:20px;
+    }
+    header img{
+        height:70px;
+    }
+    header h1{
+        font-size:26px;
+        margin:0;
+    }
+    nav{
+        background:#1e5f8b;
+        display:flex;
+        flex-wrap:wrap;
+    }
+    nav button{
+        flex:1;
+        padding:12px;
+        background:none;
+        border:none;
+        color:#fff;
+        cursor:pointer;
+        font-size:15px;
+    }
+    nav button:hover, nav button.active{
+        background:#144a6b;
+    }
+    section{
+        display:none;
+        padding:25px 40px;
+        background:#fff;
+        margin:20px;
+        border-radius:8px;
+        box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    }
+    section.active{
+        display:block;
+    }
+    h2{
+        color:#0a3d62;
+        margin-top:0;
+    }
+    .simulation input{
+        padding:8px;
+        width:250px;
+        margin:5px 0;
+    }
+    .simulation button{
+        padding:10px 18px;
+        background:#0a3d62;
+        color:#fff;
+        border:none;
+        cursor:pointer;
+        border-radius:4px;
+        margin-top:10px;
+    }
+    .result{
+        margin-top:15px;
+        font-weight:bold;
+    }
+    footer{
+        background:#0a3d62;
+        color:#fff;
+        text-align:center;
+        padding:12px;
+        margin-top:30px;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <img src="C:\Users\prachi jadhav\Downloads\PCCOE-Logo-24.png" alt="PCCOE Logo">
+    <h1>Virtual Mathematics Laboratory – Exact Differential Equations</h1>
+</header>
+
+<nav>
+    <button class="active" onclick="showTab('aim')">Aim</button>
+    <button onclick="showTab('theory')">Theory</button>
+    <button onclick="showTab('procedure')">Procedure</button>
+    <button onclick="showTab('pretest')">Pre-Test</button>
+    <button onclick="showTab('simulation')">Simulation</button>
+    <button onclick="showTab('posttest')">Post-Test</button>
+    <button onclick="showTab('references')">References</button>
+    <button onclick="showTab('contributors')">Contributors</button>
+</nav>
+
+<section id="aim" class="active">
+    <h2>Aim</h2>
+    <p>
+        To study the concept of exact and non-exact differential equations and to
+        develop an interactive virtual laboratory that determines the exactness
+        of a given first-order differential equation of the form
+        M(x,y)dx + N(x,y)dy = 0. The experiment also aims to help students
+        understand the role of integrating factors and the systematic procedure
+        for obtaining the general solution.
+    </p>
+</section>
+
+<section id="theory">
+    <h2>Theory</h2>
+     <p>
+    A first-order differential equation of the form
+    <b>M(x, y) dx + N(x, y) dy = 0</b>
+    is called an <b>exact differential equation</b> if there exists a scalar
+    function <b>F(x, y)</b> such that:
+  </p>
+
+  <p style="margin-left:20px;">
+    dF = (∂F/∂x) dx + (∂F/∂y) dy = M dx + N dy
+  </p>
+
+  <p>
+    This implies that:
+  </p>
+
+  <p style="margin-left:20px;">
+    M = ∂F/∂x &nbsp;&nbsp; and &nbsp;&nbsp; N = ∂F/∂y
+  </p>
+
+  <p>
+    A necessary and sufficient condition for exactness is that the mixed
+    partial derivatives are equal, provided the functions are continuous
+    in the given region:
+  </p>
+
+  <p style="margin-left:20px;">
+    ∂M/∂y = ∂N/∂x
+  </p>
+
+  <p>
+    If the given differential equation is exact, the solution can be
+    obtained by integrating <b>M(x, y)</b> with respect to <b>x</b>, treating
+    <b>y</b> as a constant. The resulting function is then differentiated
+    partially with respect to <b>y</b> and compared with <b>N(x, y)</b> to
+    determine the remaining function of <b>y</b>.
+  </p>
+
+  <p>
+    The final solution of an exact differential equation is expressed
+    implicitly as:
+  </p>
+
+  <p style="margin-left:20px;">
+    F(x, y) = C
+  </p>
+
+  <p>
+    Many practical differential equations are not exact in their original
+    form. In such cases, an <b>integrating factor (μ)</b> is introduced to
+    convert the equation into an exact one.
+  </p>
+
+  <p>
+    If the expression
+    <b>(∂M/∂y − ∂N/∂x) / N</b>
+    is a function of <b>x</b> alone, then an integrating factor
+    <b>μ(x)</b> exists. Similarly, if
+    <b>(∂N/∂x − ∂M/∂y) / M</b>
+    is a function of <b>y</b> alone, then an integrating factor
+    <b>μ(y)</b> exists.
+  </p>
+
+  <p>
+    Multiplying the original differential equation by the appropriate
+    integrating factor converts it into an exact equation, which can then
+    be solved using the standard procedure.
+  </p>
+
+  <p>
+    Exact differential equations are widely used in engineering and applied
+    sciences such as thermodynamics, fluid mechanics, and electrical
+    engineering.
+  </p>
+
+   </section>
+<section id="procedure">
+    <h2>Procedure</h2>
+    <ol>
+        <li>Input the functions M(x,y) and N(x,y).</li>
+        <li>Compute ∂M/∂y and ∂N/∂x.</li>
+        <li>If ∂M/∂y = ∂N/∂x, the equation is exact.</li>
+        <li>Integrate M with respect to x to obtain F(x,y).</li>
+        <li>Add the missing function of y by comparing with N.</li>
+        <li>If non-exact, test for integrating factor μ(x) using
+            (∂M/∂y − ∂N/∂x)/N.</li>
+        <li>Similarly test μ(y) using (∂N/∂x − ∂M/∂y)/M.</li>
+        <li>Multiply by μ and solve as an exact equation.</li>
+        <li>Display the solution F(x,y) = C.</li>
+    </ol>
+     <h2>Solved Example</h2>
+
+  <p><b>Problem:</b><br>
+    Check whether the differential equation<br>
+    <b>(2xy + y<sup>2</sup>) dx + (x<sup>2</sup> + 2xy) dy = 0</b><br>
+    is exact. If exact, find its general solution.
+  </p>
+
+  <p><b>Step 1: Identify M(x, y) and N(x, y)</b></p>
+  <p>
+    M(x, y) = <b>2xy + y<sup>2</sup></b><br>
+    N(x, y) = <b>x<sup>2</sup> + 2xy</b>
+  </p>
+
+  <p><b>Step 2: Compute the partial derivatives</b></p>
+  <p>
+    ∂M/∂y = ∂/∂y (2xy + y<sup>2</sup>) = <b>2x + 2y</b><br>
+    ∂N/∂x = ∂/∂x (x<sup>2</sup> + 2xy) = <b>2x + 2y</b>
+  </p>
+
+  <p><b>Step 3: Check the exactness condition</b></p>
+  <p>
+    Since <b>∂M/∂y = ∂N/∂x</b>, the given differential equation is
+    <b>exact</b>.
+  </p>
+
+  <p><b>Step 4: Integrate M with respect to x</b></p>
+  <p>
+    ∫(2xy + y<sup>2</sup>) dx = <b>x<sup>2</sup>y + xy<sup>2</sup> + g(y)</b>
+  </p>
+
+  <p><b>Step 5: Differentiate with respect to y and compare with N</b></p>
+  <p>
+    ∂/∂y (x<sup>2</sup>y + xy<sup>2</sup> + g(y)) =
+    <b>x<sup>2</sup> + 2xy + g'(y)</b>
+  </p>
+
+  <p>
+    Comparing with <b>N(x, y) = x<sup>2</sup> + 2xy</b>, we get:
+    <br>
+    <b>g'(y) = 0 ⇒ g(y) = C</b>
+  </p>
+
+  <p><b>Step 6: Write the general solution</b></p>
+  <p>
+    <b>x<sup>2</sup>y + xy<sup>2</sup> = C</b>
+  </p>
+
+  <p><b>Final Answer:</b><br>
+    The given differential equation is <b>exact</b> and its general solution is
+    <b>x<sup>2</sup>y + xy<sup>2</sup> = C</b>.
+  </p>
+   <hr style="border: 1px solid #0a3d62; margin: 20px 0;">
+</section>
+
+
+<section id="pretest">
+    
+    <h2><b>Pre-Test: Numerical Questions</b></h2>
+
+  <p><b>Q1.</b> Determine whether the differential equation<br>
+    <b>(x<sup>2</sup> + y) dx + (x + y<sup>2</sup>) dy = 0</b><br>
+    is exact or not.
+  </p>
+
+  <p><b>Q2.</b> Check the exactness of the differential equation<br>
+    <b>(2xy + 1) dx + x<sup>2</sup> dy = 0</b>.
+  </p>
+
+  <p><b>Q3.</b> Verify whether the differential equation<br>
+    <b>(y sin x) dx + (cos x) dy = 0</b><br>
+    is an exact differential equation.
+  </p>
+
+  <p><b>Q4.</b> Test the exactness of the equation<br>
+    <b>(3x<sup>2</sup> + y) dx + x dy = 0</b>.
+  </p>
+
+  <p><b>Q5.</b> Examine whether the differential equation<br>
+    <b>(x + y) dx + (x − y) dy = 0</b><br>
+    is exact.
+  </p>
+
+</section>
+
+
+<section id="simulation" class="simulation">
+    <h2>Simulation</h2>
+    <p>Enter M(x,y) and N(x,y):</p>
+    <input type="text" id="M" placeholder="M(x,y) e.g. x*y + y">
+    <br>
+    <input type="text" id="N" placeholder="N(x,y) e.g. x*x + x">
+    <br>
+    <button onclick="checkExactness()">Check Exactness</button>
+
+    <div class="result" id="output"></div>
+</section>
+
+<section id="posttest">
+    <h2>Post-Test</h2>
+     <p><b>Q1.</b> Solve the differential equation<br>
+    <b>(2x + y) dx + (x + 2y) dy = 0</b><br>
+    and obtain its general solution.
+  </p>
+
+  <p><b>Q2.</b> Determine whether the differential equation<br>
+    <b>(y + x ln y) dx + x dy = 0</b><br>
+    is exact. If not, find a suitable integrating factor and solve it.
+  </p>
+
+  <p><b>Q3.</b> Solve the differential equation using an integrating factor:<br>
+    <b>(x<sup>2</sup>y) dx + (x<sup>3</sup>) dy = 0</b>.
+  </p>
+
+  <p><b>Q4.</b> Verify whether the differential equation<br>
+    <b>(e<sup>x</sup> sin y) dx + (e<sup>x</sup> cos y) dy = 0</b><br>
+    is exact and hence find its solution.
+  </p>
+
+  <p><b>Q5.</b> Solve the differential equation<br>
+    <b>(3x<sup>2</sup>y + y) dx + (x<sup>3</sup> + x) dy = 0</b><br>
+    and express the result in implicit form.
+  </p>
+</section>
+
+<section id="references">
+    <h2>References</h2>
+    <ul>
+        <li>Erwin Kreyszig – Advanced Engineering Mathematics</li>
+        <li>B.S. Grewal – Higher Engineering Mathematics</li>
+        <li>MIT OpenCourseWare – Differential Equations</li>
+        <li>NPTEL Mathematics Lecture Series</li>
+    </ul>
+</section>
+
+<section id="contributors">
+    <h2>Contributors</h2>
+    <p><b>Guide:</b> Mr. Dinesh Kute<br>
+       Assistant Professor,<br>
+       Department of Applied Mathematics & Humanities,<br>
+       Pimpri Chinchwad College of Engineering (PCCOE), Pune</p>
+
+    <p><b>Student Developer(s):</b><br>
+       Disha Patharkar – PRN: 125B1F259<br>
+       Diya Bhansali – PRN: 125B1F271<br>
+       Prachi Jadhav – PRN: 125B1F273<br>
+       Khushi Kolhe – PRN: 125B1F275
+    </p>
+</section>
+
+<footer>
+    © PCCOE Virtual Lab | Exact Differential Equations
+</footer>
+
+<script>
+function showTab(id){
+    document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
+    event.target.classList.add("active");
+    document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+}
+
+function checkExactness(){
+    try{
+        const M = document.getElementById("M").value;
+        const N = document.getElementById("N").value;
+
+        const dMdy = math.derivative(M, 'y').toString();
+        const dNdx = math.derivative(N, 'x').toString();
+
+        let result = "∂M/∂y = " + dMdy + "<br>∂N/∂x = " + dNdx + "<br>";
+
+        if(dMdy === dNdx){
+            result += "<span style='color:green'>The equation is EXACT.</span>";
+        }else{
+            result += "<span style='color:red'>The equation is NOT EXACT.</span>";
+        }
+        document.getElementById("output").innerHTML = result;
+    }catch(e){
+        document.getElementById("output").innerHTML =
+            "<span style='color:red'>Invalid input. Please check expressions.</span>";
+    }
+}
+</script>
+
+</body>
+</html>
