@@ -6,6 +6,8 @@
 
 <!-- Math.js for symbolic differentiation -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 
 <style>
     body{
@@ -86,13 +88,99 @@
         padding:12px;
         margin-top:30px;
     }
+.mcq{
+  margin-bottom:20px;
+}
+.mcq button{
+  display:block;
+  margin:6px 0;
+  padding:8px 12px;
+  width:100%;
+  text-align:left;
+  border:1px solid #ccc;
+  background:#f8f9fa;
+  cursor:pointer;
+  border-radius:4px;
+}
+.mcq button.correct{
+  background:#d4edda;
+  border-color:#28a745;
+  color:#155724;
+}
+.mcq button.wrong{
+  background:#f8d7da;
+  border-color:#dc3545;
+  color:#721c24;
+}
+/* ===== Contributors Layout ===== */
+.students-row{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap:30px;
+  margin-top:30px;
+  text-align:center;
+}
+
+.guide-row{
+  display:flex;
+  justify-content:center;
+  margin-top:40px;
+}
+
+.contributor-card{
+  background:#f8f9fa;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+
+.contributor-card img{
+  width:150px;
+  height:150px;
+  object-fit:cover;
+  border-radius:50%;
+  border:4px solid #1e5f8b;
+  margin-bottom:12px;
+}
+
+.contributor-card h3{
+  margin:10px 0 5px;
+  color:#0a3d62;
+}
+
+.contributor-card p{
+  margin:4px 0;
+  font-size:14px;
+}
+
+/* Responsive: stack students on small screens */
+@media(max-width:900px){
+  .students-row{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media(max-width:500px){
+  .students-row{
+    grid-template-columns: 1fr;
+  }
+}
+/* Center content inside contributor cards */
+.contributor-card{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+
+
+
 </style>
 </head>
 
 <body>
 
 <header>
-    <img src="PCCOE-Logo-24.png" alt="PCCOE Logo">
+    <img src="C:\Users\prachi jadhav\Downloads\PCCOE-Logo-24.png" alt="PCCOE Logo">
     <h1>Virtual Mathematics Laboratory – Exact Differential Equations</h1>
 </header>
 
@@ -267,33 +355,75 @@
 
 
 <section id="pretest">
-    
-    <h2><b>Pre-Test: Numerical Questions</b></h2>
+  <h2><b>Pre-Test: Multiple Choice Questions</b></h2>
 
-  <p><b>Q1.</b> Determine whether the differential equation<br>
-    <b>(x<sup>2</sup> + y) dx + (x + y<sup>2</sup>) dy = 0</b><br>
-    is exact or not.
-  </p>
+  <!-- Question 1 -->
+  <div class="mcq">
+    <p><b>Q1.</b> The differential equation \( Mdx + Ndy = 0 \) is exact if:</p>
+    <button onclick="check(this,false)">
+      A) \( \dfrac{\partial M}{\partial y} + \dfrac{\partial N}{\partial x} = 0 \)
+    </button>
+    <button onclick="check(this,true)">
+      B) \( \dfrac{\partial M}{\partial y} - \dfrac{\partial N}{\partial x} = 0 \)
+    </button>
+    <button onclick="check(this,false)">
+      C) \( \dfrac{\partial M}{\partial x} - \dfrac{\partial N}{\partial y} = 0 \)
+    </button>
+    <button onclick="check(this,false)">
+      D) \( \dfrac{\partial M}{\partial x} + \dfrac{\partial N}{\partial y} = 0 \)
+    </button>
+  </div>
 
-  <p><b>Q2.</b> Check the exactness of the differential equation<br>
-    <b>(2xy + 1) dx + x<sup>2</sup> dy = 0</b>.
-  </p>
+  <!-- Question 2 -->
+  <div class="mcq">
+    <p><b>Q2.</b> For the differential equation  
+      \( 2xy\,dx + (x^2 - 1)\,dy = 0 \), is it exact?</p>
 
-  <p><b>Q3.</b> Verify whether the differential equation<br>
-    <b>(y sin x) dx + (cos x) dy = 0</b><br>
-    is an exact differential equation.
-  </p>
+    <button onclick="check(this,true)">
+      A) Yes, \( \dfrac{\partial M}{\partial y} = 2x \) and
+      \( \dfrac{\partial N}{\partial x} = 2x \)
+    </button>
+    <button onclick="check(this,false)">
+      B) No, \( \dfrac{\partial M}{\partial y} = 2y \) and
+      \( \dfrac{\partial N}{\partial x} = 2x \)
+    </button>
+  </div>
 
-  <p><b>Q4.</b> Test the exactness of the equation<br>
-    <b>(3x<sup>2</sup> + y) dx + x dy = 0</b>.
-  </p>
+  <!-- Question 3 -->
+  <div class="mcq">
+    <p><b>Q3.</b> For the differential equation  
+      \( y\,dx - x\,dy = 0 \), which of the following is <b>NOT</b>
+      an integrating factor?</p>
 
-  <p><b>Q5.</b> Examine whether the differential equation<br>
-    <b>(x + y) dx + (x − y) dy = 0</b><br>
-    is exact.
-  </p>
+    <button onclick="check(this,false)">A) \( \dfrac{1}{y^2} \)</button>
+    <button onclick="check(this,false)">B) \( \dfrac{1}{xy} \)</button>
+    <button onclick="check(this,false)">C) \( \dfrac{1}{x^2 + y^2} \)</button>
+    <button onclick="check(this,true)">D) \( \dfrac{1}{x^2} \)</button>
+  </div>
 
+  <!-- Question 4 -->
+  <div class="mcq">
+    <p><b>Q4.</b> The differential equation  
+      \( (x+1)\dfrac{dy}{dx} = y \) is:</p>
+
+    <button onclick="check(this,false)">A) Linear & Exact</button>
+    <button onclick="check(this,false)">B) Homogeneous & Separable</button>
+    <button onclick="check(this,true)">C) Separable & Non-Exact</button>
+    <button onclick="check(this,false)">D) Exact & Homogeneous</button>
+  </div>
+
+  <!-- Question 5 -->
+  <div class="mcq">
+    <p><b>Q5.</b> The general solution of an exact differential equation
+      \( Mdx + Ndy = 0 \) is of the form:</p>
+
+    <button onclick="check(this,false)">A) \( u(x,y) = C \)</button>
+    <button onclick="check(this,false)">B) \( v(x,y) = C \)</button>
+    <button onclick="check(this,true)">C) Both A and B</button>
+    <button onclick="check(this,false)">D) Neither A nor B</button>
+  </div>
 </section>
+
 
 
 <section id="simulation" class="simulation">
@@ -333,6 +463,7 @@
     <b>(3x<sup>2</sup>y + y) dx + (x<sup>3</sup> + x) dy = 0</b><br>
     and express the result in implicit form.
   </p>
+<p style="text-align: center; font-size 24px;"> Check Solutions Using Simulator. </p>
 </section>
 
 <section id="references">
@@ -346,19 +477,49 @@
 </section>
 
 <section id="contributors">
-    <h2>Contributors</h2>
-    <p><b>Guide:</b> Mr. Dinesh Kute<br>
-       Assistant Professor,<br>
-       Department of Applied Mathematics & Humanities,<br>
-       Pimpri Chinchwad College of Engineering (PCCOE), Pune</p>
+  <h2>Contributors</h2>
 
-    <p><b>Student Developer(s):</b><br>
-       Disha Patharkar – PRN: 125B1F259<br>
-       Diya Bhansali – PRN: 125B1F271<br>
-       Prachi Jadhav – PRN: 125B1F273<br>
-       Khushi Kolhe – PRN: 125B1F275
-    </p>
+  <!-- STUDENTS ROW -->
+  <div class="students-row">
+
+    <div class="contributor-card">
+      <img src="C:\Users\prachi jadhav\Downloads\DISHA.png" alt="Disha Patharkar">
+     <h3>Disha Patharkar</h3>
+      <p>PRN: 125B1F259</p>
+    </div>
+
+    <div class="contributor-card">
+      <img src="C:\Users\prachi jadhav\Downloads\prachi.png" alt="Prachi Jadhav">
+      <h3>Prachi Jadhav</h3>
+      <p>PRN: 125B1F273</p>
+          </div>
+
+    <div class="contributor-card">
+      <img src="C:\Users\prachi jadhav\Downloads\diya.png" alt="Diya Bhansali">
+     <h3>Diya Bhansali</h3>
+      <p>PRN: 125B1F271</p>
+    </div>
+
+    <div class="contributor-card">
+      <img src="C:\Users\prachi jadhav\Downloads\khushi.png" alt="Khushi Kolhe">
+       <h3>Khushi Kolhe</h3>
+      <p>PRN: 125B1F275</p>
+          </div>
+
+  </div>
+
+  <!-- GUIDE CENTERED AT BOTTOM -->
+  <div class="guide-row">
+    <div class="contributor-card">
+      <img src="C:\Users\prachi jadhav\Downloads\sir.png" alt="Mr. Dinesh B. Kute">
+      <h3>Mr. Dinesh B. Kute</h3>
+      <p><b>Guide / Mentor</b></p>
+      <p>Department of Applied Science & Humanities</p>
+      <p>PCCOE, Pune</p>
+    </div>
+  </div>
 </section>
+
 
 <footer>
     © PCCOE Virtual Lab | Exact Differential Equations
@@ -393,8 +554,20 @@ function checkExactness(){
             "<span style='color:red'>Invalid input. Please check expressions.</span>";
     }
 }
+function check(btn, isCorrect){
+  const buttons = btn.parentElement.querySelectorAll("button");
+  buttons.forEach(b => b.disabled = true);
+
+  if(isCorrect){
+    btn.classList.add("correct");
+    btn.innerHTML += " ✔ Correct";
+  }else{
+    btn.classList.add("wrong");
+    btn.innerHTML += " ✘ Wrong";
+  }
+}
+
 </script>
 
 </body>
-
 </html>
